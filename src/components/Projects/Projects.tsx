@@ -86,6 +86,20 @@ const Projects = () => {
           </div>
         }
       />
+      <ProjectCard
+        title="SpaceInvaderS"
+        hasWebsite={false}
+        websiteLink={""}
+        openSource={true}
+        githubLink={"https://github.com/yahya-mohammed07/SpaceInvaderS"}
+        description="A little game made it the beginning of my journey, gonna optimize it one day"
+        tech={
+          <div className="flex justify-evenly p-2">
+            <span>C++</span>
+            <span>SFML</span>
+          </div>
+        }
+      />
     </div>
   );
 };
