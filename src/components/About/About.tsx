@@ -1,5 +1,4 @@
 import { FaGithubAlt } from "react-icons/fa6";
-import { FaLinkedin } from "react-icons/fa";
 import YButton from "../Elemets/YButton";
 const About = () => {
   return (
@@ -27,12 +26,11 @@ const About = () => {
       </p>
       <div className="flex justify-center gap-1 mt-5">
         <YButton>Resume</YButton>
-        <YButton>
-          <FaGithubAlt size={25} />
-        </YButton>
-        <YButton>
-          <FaLinkedin size={25} />
-        </YButton>
+        <a href="https://github.com/yahya-mohammed07" target="_blank">
+          <YButton>
+            <FaGithubAlt size={30} />
+          </YButton>
+        </a>
       </div>
     </div>
   );

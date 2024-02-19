@@ -1,5 +1,8 @@
 import About from "./components/About/About";
+import Contact from "./components/Contact/contact";
 import Navbar from "./components/Navbar/Navbar";
+import Projects from "./components/Projects/Projects";
+import Skills from "./components/Skills/Skills";
 
 function App() {
   return (
@@ -7,35 +10,44 @@ function App() {
       <header>
         <Navbar />
       </header>
-      <main className="dark:bg-black">
+      <main className="">
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "1fr",
-            gridTemplateRows: "1fr 1fr 1fr 1fr",
-            gap: 20,
+            gridTemplateRows: "1fr",
+            gap: 10,
           }}
           className=""
         >
           <section
             id="section_about"
-            className=" flex justify-center items-center"
+            className="flex justify-center items-center"
           >
             <About />
           </section>
-          <section id="section_skills" className=" h-full">
-            skill
+          <section id="section_skills" className="text-center mt-28">
+            <p className="md:text-4xl font-Roboto font-semibold text-gray-700 mt-5">
+              Skills
+            </p>
+            <Skills />
           </section>
-          <section id="section_project" className=" h-full">
-            projects
+          <section id="section_project" className="text-center">
+            <p className="md:text-4xl font-Roboto font-semibold text-gray-700 mt-5">
+              Projects
+            </p>
+            <Projects />
           </section>
-          <section id="section_contact" className=" h-full">
-            let us contact
+          <section id="section_contact" className="text-center mx-auto">
+            <p className="md:text-4xl font-Roboto font-semibold text-gray-700 mt-5">
+              Let's Contact and create something
+            </p>{" "}
+            <Contact />
           </section>
         </div>
       </main>
 
-      <footer className="mx-auto text-center">Yahya &copy;</footer>
+      <footer className="mx-auto text-center p-6">Yahya &copy;</footer>
     </>
   );
 }
