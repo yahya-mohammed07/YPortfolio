@@ -1,0 +1,19 @@
+html{
+  scroll-behavior: smooth;
+}
+
+li {
+  display: inline-block;
+  margin-right: 20px; /* Adjust as needed */
+}
+
+a {
+  text-decoration: none;
+  color: #3333338c; /* Adjust the color as needed */
+  font-weight: bold;
+  transition: color 0.3s ease; /* Add smooth color transition */
+}
+
+a:hover {
+  color: #007bff; /* Change color on hover */
+}
