@@ -33,7 +33,7 @@ const About = () => {
         </a>
         <a href="https://github.com/yahya-mohammed07" target="_blank">
           <YButton>
-            <FaGithubAlt size={30} />
+            <FaGithubAlt size={28} />
           </YButton>
         </a>
       </div>
