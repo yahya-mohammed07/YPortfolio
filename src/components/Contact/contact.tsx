@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
+import YButton from "../Elemets/YButton";
 //import toast from "react-hot-toast";
 
 export default function Contact() {
@@ -79,12 +80,7 @@ export default function Contact() {
               required
             />
             <div className="text-center">
-              <button
-                className="border px-3 py-2 rounded-md active:bg-slate-300 hover:bg-slate-100 text-xl text-gray-900"
-                type="submit"
-              >
-                Send
-              </button>
+              <YButton>Send</YButton>
             </div>
           </form>
         </div>
