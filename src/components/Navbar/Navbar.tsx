@@ -49,7 +49,7 @@ const MobileNavbar = () => {
               Projects
             </CustomLinkMobile>
             <CustomLinkMobile href="#section_contact">
-              Let's Collaborate ;)
+              Let's Collaborate :)
             </CustomLinkMobile>
           </ul>
         </div>
@@ -98,7 +98,7 @@ const Navbar = () => {
             <CustomLink href="#section_skills">Skills</CustomLink>
             <CustomLink href="#section_project">Projects</CustomLink>
             <CustomLink href="#section_contact">
-              Let's Collaborate ;)
+              Let's Collaborate :)
             </CustomLink>
           </ul>
         </nav>

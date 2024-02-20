@@ -92,7 +92,7 @@ const Projects = () => {
         websiteLink={""}
         openSource={true}
         githubLink={"https://github.com/yahya-mohammed07/SpaceInvaderS"}
-        description="A little game made it the beginning of my journey, gonna optimize it one day"
+        description="A little game that i made at the beginning of my programming journey. gonna optimize it one day"
         tech={
           <div className="flex justify-evenly p-2">
             <span>C++</span>

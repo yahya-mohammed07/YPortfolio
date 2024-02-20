@@ -42,7 +42,7 @@ function App() {
           </section>
           <section id="section_contact" className="text-center mx-auto">
             <p className="text-2xl md:text-4xl font-Roboto font-semibold text-gray-700 mt-5">
-              Ready when you are :)
+              Ready when you are
             </p>
             <Contact />
           </section>
