@@ -45,10 +45,10 @@ export default function Contact() {
   return (
     <>
       <div className="grid justify-center items-center m-5">
-        <div className="flex flex-col p-6 w-full mt-10 md:w-80 border rounded-md border-gray-800">
+        <div className="flex flex-col bg-neutral-50 p-6 w-full mt-10 md:w-80 border rounded-md border-orange-800">
           <form method="Post" onSubmit={onSubmit}>
             <input
-              className="border-solid mb-4 w-full border rounded-md p-3 text-blue-800"
+              className="border-solid mb-4 w-full border rounded-md p-3 text-orange-800"
               placeholder="Your Name..."
               type="text"
               name="usrName"
@@ -58,7 +58,7 @@ export default function Contact() {
               onChange={handleUsernameChange}
             />
             <input
-              className="mx-auto border-solid mb-4 w-full border rounded-md text-blue-800 p-3"
+              className="mx-auto border-solid mb-4 w-full border rounded-md text-orange-800 p-3"
               placeholder="Your Email..."
               type="email"
               name="email"
@@ -69,7 +69,7 @@ export default function Contact() {
               onChange={handleEmailChange}
             />
             <textarea
-              className="border-solid mb-4 w-full border rounded-md p-3 h-32 resize-none text-blue-800"
+              className="border-solid mb-4 w-full border rounded-md p-3 h-32 resize-none text-orange-800"
               placeholder="Your Message..."
               name="msg"
               maxLength={120}

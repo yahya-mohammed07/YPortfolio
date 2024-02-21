@@ -1,6 +1,6 @@
 {
-  "name": "portfolio",
-  "version": "0.0.0",
+  "name": "yportfolio",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",

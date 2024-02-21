@@ -3,7 +3,7 @@ import SkillSpan from "../Elemets/SkillsSpan";
 const Skills = () => {
   return (
     <div
-      className="grid-cols-1 md:grid-cols-3 text-center max-w-6xl mt-5 mx-auto p-6  justify-center items-center"
+      className="grid-cols-1 md:grid-cols-3 text-center max-w-6xl mt-5 mx-auto justify-center items-center "
       style={{
         display: "grid",
         gap: 5,
