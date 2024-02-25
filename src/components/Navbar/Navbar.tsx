@@ -29,6 +29,7 @@ const MobileNavbar = () => {
   // top-full class ensures it starts below the top edge of its containing block.
   // right-0 class places it against the right edge
   // z-10 class ensures it appears above other elements with a lower z-index.
+  // this should 
   return (
     <>
       {open && (
@@ -36,7 +37,7 @@ const MobileNavbar = () => {
           className={
             !open
               ? "hidden"
-              : "sm:hidden absolute top-10 right-0 left-0 bg-neutral-50 shadow-xl border z-50"
+              : "sm:hidden absolute  top-10 right-0 left-0 bg-neutral-50 shadow-xl border z-50"
           }
         >
           <ul
