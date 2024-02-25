@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import styles from "./navbar.module.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import useIsNavOpenState from "../../states/openState";
-
+import { MdOutlineClose } from "react-icons/md";
 interface CustomLinkType {
   href: string;
   children: ReactNode;
@@ -36,11 +36,11 @@ const MobileNavbar = () => {
           className={
             !open
               ? "hidden"
-              : "sm:hidden flex justify-center items-center m-auto max-w-96 mx-auto absolute top-full right-0 left-0 bg-white rounded-lg overflow-hidden shadow-xl border z-50"
+              : "sm:hidden absolute top-10 right-0 left-0 bg-neutral-50 shadow-xl border z-50"
           }
         >
           <ul
-            className="flex flex-col text-sm h-full w-svw p-4 text-center list-none relative overflow-auto"
+            className="flex flex-col text-sm h-dvh w-svw p-2 text-right list-none"
             onClick={toggleMobileNav}
           >
             <CustomLinkMobile href="#section_about">About</CustomLinkMobile>
@@ -88,7 +88,7 @@ const Navbar = () => {
             className="sm:hidden -mt-1 active:bg-slate-400 focus:outline-none hover:rounded-lg hover:bg-slate-300 p-2 text-xl"
             onClick={toggleNavbar}
           >
-            <GiHamburgerMenu />
+            {isNavOpen ? <MdOutlineClose /> : <GiHamburgerMenu />}
           </button>
           {/*if click it true then show mobile navbar*/}
           {isNavOpen && <MobileNavbar />}
