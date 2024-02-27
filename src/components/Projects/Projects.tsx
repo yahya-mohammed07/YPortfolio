@@ -19,7 +19,7 @@ const Projects = () => {
         tech={
           <div className="flex justify-evenly p-2">
             <span>React (Ts)</span>
-            <span>Express (Js)</span>
+            <span>FastAPI (Python)</span>
             <span>TailwindCSS</span>
           </div>
         }

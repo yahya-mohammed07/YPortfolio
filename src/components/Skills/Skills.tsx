@@ -9,10 +9,10 @@ const Skills = () => {
         gap: 5,
       }}
     >
-      <SkillSpan>Backend (Express & Flask & CROW)</SkillSpan>
-      <SkillSpan>Frontend (React / Typescript)</SkillSpan>
+      <SkillSpan>Backend (FastAPI; Flask; CROW)</SkillSpan>
+      <SkillSpan>Frontend (React)</SkillSpan>
       <SkillSpan>Mobile (Flutter)</SkillSpan>
-      <SkillSpan>Database (MySQL & SQlite3 & MongoDB)</SkillSpan>
+      <SkillSpan>Database (MySQL; SQlite3; MongoDB)</SkillSpan>
       <SkillSpan>Data scraper (Python)</SkillSpan>
       <SkillSpan>Translator (En - Ar)</SkillSpan>
     </div>
