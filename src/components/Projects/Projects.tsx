@@ -10,6 +10,22 @@ const Projects = () => {
       }}
     >
       <ProjectCard
+        title="Al-Kfaat For Private Tutoring"
+        hasWebsite={true}
+        websiteLink={"https://al-kfaat.netlify.app"}
+        openSource={false}
+        githubLink=""
+        description="Private Educational Institute"
+        tech={
+          <div className="flex justify-evenly p-2">
+            <span>React (Ts)</span>
+            <span>TailwindCSS</span>
+            <span>Framer Motion</span>
+            <span>Database</span>
+          </div>
+        }
+      />
+      <ProjectCard
         title="Wellix"
         hasWebsite={true}
         websiteLink={"https://wellix.onrender.com/"}

@@ -3,6 +3,7 @@ import styles from "./navbar.module.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import useIsNavOpenState from "../../states/openState";
 import { MdOutlineClose } from "react-icons/md";
+
 interface CustomLinkType {
   href: string;
   children: ReactNode;

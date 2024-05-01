@@ -8,7 +8,7 @@ import Skills from "./components/Skills/Skills";
 function App() {
   return (
     <>
-    <Toaster/>
+      <Toaster />
       <header>
         <Navbar />
       </header>
@@ -49,7 +49,9 @@ function App() {
         </div>
       </main>
 
-      <footer className="mx-auto text-center py-5 font-Nunito text-xl">Yahya &copy;</footer>
+      <footer className="mx-auto text-center py-5 font-Nunito text-xl">
+        Yahya &copy;
+      </footer>
     </>
   );
 }
