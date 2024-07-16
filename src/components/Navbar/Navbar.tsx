@@ -30,7 +30,7 @@ const MobileNavbar = () => {
   // top-full class ensures it starts below the top edge of its containing block.
   // right-0 class places it against the right edge
   // z-10 class ensures it appears above other elements with a lower z-index.
-  // this should 
+  // this should
   return (
     <>
       {open && (
@@ -51,7 +51,7 @@ const MobileNavbar = () => {
               Projects
             </CustomLinkMobile>
             <CustomLinkMobile href="#section_contact">
-              Let's Collaborate :)
+              Contact Me :)
             </CustomLinkMobile>
           </ul>
         </div>
@@ -99,9 +99,7 @@ const Navbar = () => {
             <CustomLink href="#section_about">About</CustomLink>
             <CustomLink href="#section_skills">Skills</CustomLink>
             <CustomLink href="#section_project">Projects</CustomLink>
-            <CustomLink href="#section_contact">
-              Let's Collaborate :)
-            </CustomLink>
+            <CustomLink href="#section_contact">Contact Me :)</CustomLink>
           </ul>
         </nav>
       </header>

@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Projects from "./components/Projects/Projects";
 import Skills from "./components/Skills/Skills";
 
-function App() {
+const App = () => {
   return (
     <>
       <Toaster />
@@ -42,7 +42,7 @@ function App() {
           </section>
           <section id="section_contact" className="text-center mx-auto mt-5">
             <p className="text-3xl md:text-4xl font-Roboto font-semibold text-gray-700 mt-5">
-              Ready when you are
+              Contact Me
             </p>
             <Contact />
           </section>

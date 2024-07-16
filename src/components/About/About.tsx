@@ -25,18 +25,13 @@ const About = () => {
         I've pushed the boundaries of innovation to new heights!
       </p>
       <div className="flex justify-center gap-1 mt-20">
-        <a
-          href="https://github.com/yahya-mohammed07/Resume/blob/main/Yahya.pdf"
-          target="_blank"
-        >
-          <YButton>Resume</YButton>
-        </a>
         <a href="https://github.com/yahya-mohammed07" target="_blank">
           <YButton>
             <FaGithubAlt size={28} />
           </YButton>
         </a>
       </div>
+      <p>*CV AVAILABLE AT REQUEST</p>
     </div>
   );
 };
