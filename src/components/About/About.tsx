@@ -19,10 +19,11 @@ const About = () => {
         .
       </p>
       <p className=" text-xl md:text-2xl font-Roboto">
-        Over nearly two years, I've embarked on a thrilling journey as a
-        developer, creating cutting-edge curated software and doing some data
-        scraping. As both an open-source advocate and a proprietary developer,
-        I've pushed the boundaries of innovation to new heights!
+        Over the past two years, I've worked as a developer, creating innovative
+        software solutions and gaining expertise in data scraping. I've explored
+        both open-source and proprietary development. It's been an exciting
+        journey, and I look forward to continuing to grow and learn in this
+        field.
       </p>
       <div className="flex justify-center gap-1 mt-20">
         <a href="https://github.com/yahya-mohammed07" target="_blank">
