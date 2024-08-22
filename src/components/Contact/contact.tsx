@@ -44,7 +44,7 @@ export default function Contact() {
   //
   return (
     <>
-      <div className="grid justify-center items-center mb-5">
+      <div className="grid justify-center items-center mb-5 sm:mx-auto mx-5">
         <div className="flex flex-col bg-neutral-50 p-6 w-full mt-10 md:w-80 border rounded-md border-orange-800">
           <form method="Post" onSubmit={onSubmit}>
             <input
