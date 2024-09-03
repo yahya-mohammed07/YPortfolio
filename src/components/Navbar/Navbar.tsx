@@ -3,6 +3,7 @@ import styles from "./navbar.module.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import useIsNavOpenState from "../../states/openState";
 import { MdOutlineClose } from "react-icons/md";
+import { PiCoffeeLight } from "react-icons/pi";
 
 interface CustomLinkType {
   href: string;
@@ -53,6 +54,18 @@ const MobileNavbar = () => {
             <CustomLinkMobile href="#section_contact">
               Contact Me :)
             </CustomLinkMobile>
+              <div className="text-center flex justify-end mr-10 mt-8 sm:text-2xl text-xl">
+                <a
+                  href="https://buymeacoffee.com/yahyabaqer"
+                  target="_blank"
+                  className="text-white"
+                >
+                  <button className="flex justify-center items-center p-2 gap-1 -top-4 bg-orange-600 -outline-offset-1 rounded-md border-0 cursor-pointer transition-all outline outline-2 hover:bg-transparent hover:text-orange-900 -mt-2">
+                    <p className="text">Buy Me A Coffee</p>
+                    <PiCoffeeLight size={30} title="Buy Me A Coffee" />
+                  </button>
+                </a>
+              </div>
           </ul>
         </div>
       )}
@@ -100,6 +113,22 @@ const Navbar = () => {
             <CustomLink href="#section_skills">Skills</CustomLink>
             <CustomLink href="#section_project">Projects</CustomLink>
             <CustomLink href="#section_contact">Contact Me :)</CustomLink>
+            <CustomLink href="#section_coffey">
+              <a
+                href="https://buymeacoffee.com/yahyabaqer"
+                target="_blank"
+                className="text-white"
+              >
+                <button className="flex justify-center items-center p-2 gap-1 -top-4 bg-orange-600 -outline-offset-1 rounded-md border-0 cursor-pointer transition-all outline outline-2 hover:bg-transparent hover:text-orange-900 -mt-2">
+                  <p className="text">Buy Me A Coffee</p>
+                  <PiCoffeeLight
+                    size={30}
+                    title="Buy Me A Coffee"
+                    className=""
+                  />
+                </button>
+              </a>
+            </CustomLink>
           </ul>
         </nav>
       </header>
