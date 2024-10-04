@@ -1,15 +1,15 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+/* import { ChangeEvent, FormEvent, useState } from "react";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
-import YButton from "../Elemets/YButton";
+import YButton from "../Elemets/YButton"; */
 //import toast from "react-hot-toast";
 
 export default function Contact() {
-  const [username, setUsername] = useState("");
+  /*   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMsg] = useState("");
+  const [message, setMsg] = useState(""); */
 
-  const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
+  /*   const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
   };
 
@@ -40,11 +40,11 @@ export default function Contact() {
         toast.error("Email sending FAILED!", { duration: 3000 });
       }
     );
-  };
+  }; */
   //
   return (
     <>
-      <div className="grid justify-center items-center mb-5 sm:mx-auto mx-5">
+      {/* <div className="grid justify-center items-center mb-5 sm:mx-auto mx-5">
         <div className="flex flex-col bg-neutral-50 p-6 w-full mt-10 md:w-80 border rounded-md border-orange-800">
           <form method="Post" onSubmit={onSubmit}>
             <input
@@ -84,10 +84,9 @@ export default function Contact() {
             </div>
           </form>
         </div>
-      </div>
-      <p>
-        *OR SEND AN EMAIL TO:{" "}
-        <span className="text-orange-900">
+      </div> */}
+      <p className="my-10">
+        <span className="text-orange-900 text-2xl border p-4 rounded-lg border-orange-800">
           <a href="mailto:yahyabaqer@proton.me">yahyabaqer@proton.me</a>
         </span>
       </p>
