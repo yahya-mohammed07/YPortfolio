@@ -88,21 +88,6 @@ const Projects = () => {
         }
       />
       <ProjectCard
-        title="Adhkar"
-        hasWebsite={true}
-        websiteLink={"https://appgallery.huawei.com/app/C109704183"}
-        openSource={false}
-        githubLink={""}
-        description="Remembrances and supplications from legal papers in one place"
-        tech={
-          <div className="flex justify-evenly p-2">
-            <span>Flutter</span>
-            <span>Dart</span>
-            <span>SQLite</span>
-          </div>
-        }
-      />
-      <ProjectCard
         title="SpaceInvaderS"
         hasWebsite={false}
         websiteLink={""}
