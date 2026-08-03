@@ -63,9 +63,9 @@ const SKILLS: Skill[] = [
 
 const Skills = () => {
   return (
-    <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-4 px-5 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-4 px-4 sm:grid-cols-2 sm:px-5 md:grid-cols-3 lg:grid-cols-4">
       {SKILLS.map((skill, i) => (
-        <Reveal key={skill.title} delay={i * 60} className="h-full">
+        <Reveal key={skill.title} delay={(i % 4) * 60} className="h-full">
           <SkillSpan icon={skill.icon} items={skill.items}>
             {skill.title}
           </SkillSpan>

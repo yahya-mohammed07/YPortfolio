@@ -9,7 +9,6 @@ export default {
     extend: {
       fontFamily: {
         Fredoka: ['Fredoka', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        Titillium: ['Titillium Web', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         Roboto: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         Nunito: ['Nunito', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         sans: ['Nunito', 'ui-sans-serif', 'system-ui', 'sans-serif'],
@@ -47,16 +46,11 @@ export default {
           from: { opacity: '0', transform: 'translateY(-8px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-8px)' },
-        },
       },
       animation: {
         'fade-up': 'fade-up 0.5s ease-out both',
         'fade-in': 'fade-in 0.4s ease-out both',
         'slide-down': 'slide-down 0.2s ease-out both',
-        float: 'float 6s ease-in-out infinite',
       },
     },
   },

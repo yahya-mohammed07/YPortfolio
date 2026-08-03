@@ -1,6 +1,5 @@
 import React from "react";
-import { FaGithub } from "react-icons/fa";
-import { LuExternalLink } from "react-icons/lu";
+import { LuExternalLink, LuGithub } from "react-icons/lu";
 
 interface ProjectCardType {
   openSource: boolean;
@@ -28,8 +27,8 @@ const ProjectCard: React.FC<ProjectCardType> = ({
 }) => {
   return (
     <article
-      className={`surface group flex h-full flex-col overflow-hidden p-6 text-left transition duration-200
-        hover:-translate-y-1 hover:shadow-lg
+      className={`surface card-lift group flex h-full flex-col overflow-hidden p-5 text-left sm:p-6
+        hover:shadow-lg
         ${
           featured
             ? "border-brand-300 ring-1 ring-brand-200 dark:border-brand-800 dark:ring-brand-900"
@@ -68,7 +67,8 @@ const ProjectCard: React.FC<ProjectCardType> = ({
               rel="noopener noreferrer"
               aria-label={`${title} — ${websiteLabel}`}
               className="inline-flex items-center gap-2 rounded-lg bg-brand-800 px-3 py-2 font-Roboto text-sm
-                font-medium text-brand-50 transition hover:bg-brand-700 active:scale-[0.98]
+                font-medium text-brand-50 transition-[background-color,transform] duration-200
+                hover:bg-brand-700 active:scale-[0.98]
                 dark:bg-brand-600 dark:hover:bg-brand-500"
             >
               <LuExternalLink size={16} aria-hidden="true" />
@@ -82,11 +82,12 @@ const ProjectCard: React.FC<ProjectCardType> = ({
               rel="noopener noreferrer"
               aria-label={`${title} — source code on GitHub`}
               className="inline-flex items-center gap-2 rounded-lg border border-stone-300 px-3 py-2
-                font-Roboto text-sm font-medium text-stone-700 transition
+                font-Roboto text-sm font-medium text-stone-700
+                transition-[color,border-color,transform] duration-200
                 hover:border-brand-500 hover:text-brand-800 active:scale-[0.98]
                 dark:border-stone-600 dark:text-stone-300 dark:hover:border-brand-400 dark:hover:text-brand-300"
             >
-              <FaGithub size={16} aria-hidden="true" />
+              <LuGithub size={16} aria-hidden="true" />
               Source
             </a>
           )}

@@ -1,4 +1,3 @@
-import { Toaster } from "react-hot-toast";
 import About from "./components/About/About";
 import Contact from "./components/Contact/contact";
 import Navbar from "./components/Navbar/Navbar";
@@ -11,8 +10,6 @@ import Reveal from "./components/Elemets/Reveal";
 const App = () => {
   return (
     <>
-      <Toaster position="bottom-center" />
-
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60]
@@ -23,7 +20,7 @@ const App = () => {
 
       <Navbar />
 
-      <main id="main" className="flex flex-col gap-24 pb-24 md:gap-32">
+      <main id="main" className="flex flex-col gap-20 pb-20 sm:gap-24 sm:pb-24 md:gap-32">
         <section id="section_about" aria-label="About">
           <About />
         </section>
@@ -59,7 +56,7 @@ const App = () => {
       </main>
 
       <footer className="border-t border-stone-200/70 py-8 dark:border-stone-800">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-5 text-center">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 text-center sm:px-5">
           <p className="font-Nunito text-sm text-stone-500 dark:text-stone-400">
             &copy; {new Date().getFullYear()} Yahya M. Baqer
           </p>

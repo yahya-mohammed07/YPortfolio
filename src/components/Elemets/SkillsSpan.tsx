@@ -8,7 +8,7 @@ interface SkillSpanType {
 
 const SkillSpan: React.FC<SkillSpanType> = ({ children, icon, items }) => {
   return (
-    <div className="surface group h-full p-5 text-left transition duration-200 hover:-translate-y-1 hover:border-brand-300 hover:shadow-md dark:hover:border-brand-700">
+    <div className="surface card-lift group h-full p-5 text-left hover:border-brand-300 hover:shadow-md dark:hover:border-brand-700">
       <div className="flex items-center gap-3">
         {icon && (
           <span

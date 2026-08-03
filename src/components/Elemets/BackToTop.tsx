@@ -6,10 +6,24 @@ const BackToTop = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 600);
+    let frame = 0;
+
+    // Scroll fires far more often than we need; coalesce to one read per frame
+    // so we never force layout mid-scroll.
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        setVisible(window.scrollY > 600);
+      });
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (
@@ -17,9 +31,14 @@ const BackToTop = () => {
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
+      aria-hidden={!visible}
       title="Back to top"
-      className={`fixed bottom-6 right-6 z-40 rounded-full bg-brand-800 p-3 text-brand-50 shadow-lg
-        transition-all duration-300 hover:bg-brand-700 active:scale-95
+      style={{
+        bottom: "max(1.25rem, env(safe-area-inset-bottom))",
+        right: "max(1.25rem, env(safe-area-inset-right))",
+      }}
+      className={`fixed z-40 rounded-full bg-brand-800 p-3 text-brand-50 shadow-lg
+        transition-[opacity,transform] duration-300 ease-out hover:bg-brand-700 active:scale-95
         dark:bg-brand-600 dark:hover:bg-brand-500
         ${
           visible

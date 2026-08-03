@@ -131,7 +131,7 @@ const PROJECTS: Project[] = [
 
 const Projects = () => {
   return (
-    <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-5 px-5 md:grid-cols-2 lg:grid-cols-3">
+    <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-4 px-4 sm:grid-cols-2 sm:gap-5 sm:px-5 lg:grid-cols-3">
       {PROJECTS.map((project, i) => (
         <Reveal key={project.title} delay={(i % 3) * 80} className="h-full">
           <ProjectCard {...project} />

@@ -6,22 +6,44 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* Lets the UA paint scrollbars/controls to match, avoiding a light flash */
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   /* Sticky navbar offset so anchored sections are not hidden under it */
   section[id] {
-    scroll-margin-top: 5.5rem;
+    scroll-margin-top: 4.5rem;
+  }
+
+  @screen md {
+    section[id] {
+      scroll-margin-top: 5.5rem;
+    }
   }
 
   body {
     @apply bg-stone-50 text-stone-800 antialiased dark:bg-ink dark:text-stone-200;
+  }
+
+  /* The ambient gradient lives on its own fixed layer instead of
+     `background-attachment: fixed` on the body, which forces the browser to
+     repaint the whole viewport on every scroll frame. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
     background-image:
       radial-gradient(60rem 30rem at 50% -10rem, rgba(249, 115, 22, 0.1), transparent 70%),
       radial-gradient(40rem 24rem at 100% 20%, rgba(120, 113, 108, 0.08), transparent 70%);
-    background-attachment: fixed;
   }
 
-  .dark body {
+  .dark body::before {
     background-image:
       radial-gradient(60rem 30rem at 50% -10rem, rgba(249, 115, 22, 0.16), transparent 70%),
       radial-gradient(40rem 24rem at 100% 20%, rgba(168, 162, 158, 0.08), transparent 70%);
@@ -55,14 +77,29 @@
 }
 
 @layer components {
+  /* No backdrop-blur here: these sit over an opaque body, so the blur costs a
+     GPU pass per card for no visible gain. */
   .surface {
-    @apply rounded-2xl border border-stone-200/80 bg-white/70 shadow-sm backdrop-blur-sm
-           dark:border-stone-700/70 dark:bg-stone-900/60;
+    @apply rounded-2xl border border-stone-200/80 bg-white/80 shadow-sm
+           dark:border-stone-700/70 dark:bg-stone-900/70;
   }
 
   .chip {
     @apply inline-flex items-center gap-1.5 rounded-full border border-stone-200 bg-white/70 px-3 py-1
            text-xs font-medium text-stone-600 dark:border-stone-700 dark:bg-stone-800/70 dark:text-stone-300;
+  }
+
+  /* Lift-on-hover for cards. Only transitions compositor-friendly properties,
+     and only on devices that actually have a hover cursor — on touch the
+     `:hover` state sticks after a tap. */
+  .card-lift {
+    @apply transition-[transform,box-shadow,border-color] duration-200 ease-out;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .card-lift:hover {
+      @apply -translate-y-1;
+    }
   }
 }
 

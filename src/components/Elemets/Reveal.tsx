@@ -7,34 +7,58 @@ interface RevealType {
   className?: string;
 }
 
+/* One observer for every Reveal on the page instead of one each — the browser
+   only has to track a single set of targets. */
+const callbacks = new WeakMap<Element, () => void>();
+let observer: IntersectionObserver | null = null;
+
+const getObserver = () => {
+  if (observer) return observer;
+  observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        callbacks.get(entry.target)?.();
+        callbacks.delete(entry.target);
+        observer?.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+  return observer;
+};
+
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 /** Fades content up the first time it scrolls into view. */
 const Reveal: React.FC<RevealType> = ({ children, delay = 0, className = "" }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
+  // Skip the observer entirely when animation is off or unsupported.
+  const [shown, setShown] = useState(
+    () => typeof IntersectionObserver === "undefined" || prefersReducedMotion()
+  );
 
   useEffect(() => {
     const node = ref.current;
-    if (!node) return;
+    if (!node || shown) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShown(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
+    const io = getObserver();
+    callbacks.set(node, () => setShown(true));
+    io.observe(node);
 
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      callbacks.delete(node);
+      io.unobserve(node);
+    };
+  }, [shown]);
 
   return (
     <div
       ref={ref}
       className={`reveal ${shown ? "reveal-visible" : ""} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
     </div>

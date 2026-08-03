@@ -1,6 +1,4 @@
-import { FaGithubAlt } from "react-icons/fa6";
-import { HiOutlineMail } from "react-icons/hi";
-import { LuBrainCircuit, LuCode, LuSmartphone } from "react-icons/lu";
+import { LuBrainCircuit, LuCode, LuGithub, LuMail, LuSmartphone } from "react-icons/lu";
 
 const HIGHLIGHTS = [
   { icon: <LuBrainCircuit size={15} />, label: "AI / RAG" },
@@ -10,19 +8,19 @@ const HIGHLIGHTS = [
 
 const About = () => {
   return (
-    <div className="mx-auto max-w-4xl px-5 pb-10 pt-16 text-center md:pt-24">
-      <p className="animate-fade-in font-Nunito text-sm font-semibold uppercase tracking-[0.2em] text-brand-700 dark:text-brand-400">
+    <div className="mx-auto max-w-4xl px-4 pb-10 pt-12 text-center sm:px-5 sm:pt-16 md:pt-24">
+      <p className="animate-fade-in font-Nunito text-xs font-semibold uppercase tracking-[0.2em] text-brand-700 sm:text-sm dark:text-brand-400">
         Software &amp; AI Developer
       </p>
 
-      <h1 className="mt-4 animate-fade-up font-Fredoka text-4xl font-medium leading-tight text-stone-700 md:text-7xl dark:text-stone-100">
+      <h1 className="mt-4 animate-fade-up text-balance font-Fredoka text-4xl font-medium leading-tight text-stone-700 sm:text-5xl md:text-6xl lg:text-7xl dark:text-stone-100">
         Hi, I'm{" "}
         <span className="bg-gradient-to-r from-brand-600 to-brand-900 bg-clip-text text-transparent dark:from-brand-400 dark:to-brand-600">
           Yahya M. Baqer
         </span>
       </h1>
 
-      <p className="mx-auto mt-6 max-w-2xl animate-fade-up font-Roboto text-lg leading-relaxed text-stone-600 md:text-xl dark:text-stone-400">
+      <p className="mx-auto mt-6 max-w-2xl animate-fade-up text-pretty font-Roboto text-base leading-relaxed text-stone-600 sm:text-lg md:text-xl dark:text-stone-400">
         Three years building software people actually use — AI assistants and
         RAG pipelines, web and backend services, mobile apps and licensed
         desktop tools. I work across open-source and proprietary projects, and
@@ -44,7 +42,8 @@ const About = () => {
         <a
           href="#section_project"
           className="inline-flex items-center gap-2 rounded-xl bg-brand-800 px-6 py-3 font-Roboto
-            text-base font-medium text-brand-50 shadow-sm transition duration-200
+            text-base font-medium text-brand-50 shadow-sm
+            transition-[background-color,box-shadow,transform] duration-200
             hover:bg-brand-700 hover:shadow-md active:scale-[0.98]
             dark:bg-brand-600 dark:hover:bg-brand-500"
         >
@@ -53,11 +52,11 @@ const About = () => {
         <a
           href="mailto:yahyabaqer@proton.me"
           className="inline-flex items-center gap-2 rounded-xl border border-stone-300 bg-white/60 px-6 py-3
-            font-Roboto text-base font-medium text-stone-700 transition duration-200
+            font-Roboto text-base font-medium text-stone-700 transition-[color,border-color] duration-200
             hover:border-brand-500 hover:text-brand-800
             dark:border-stone-600 dark:bg-stone-800/60 dark:text-stone-200 dark:hover:border-brand-400 dark:hover:text-brand-300"
         >
-          <HiOutlineMail size={20} aria-hidden="true" />
+          <LuMail size={20} aria-hidden="true" />
           Get in touch
         </a>
         <a
@@ -66,10 +65,10 @@ const About = () => {
           rel="noopener noreferrer"
           aria-label="GitHub profile"
           className="inline-flex items-center justify-center rounded-xl border border-stone-300 bg-white/60 p-3
-            text-stone-700 transition duration-200 hover:border-brand-500 hover:text-brand-800
+            text-stone-700 transition-[color,border-color] duration-200 hover:border-brand-500 hover:text-brand-800
             dark:border-stone-600 dark:bg-stone-800/60 dark:text-stone-200 dark:hover:border-brand-400 dark:hover:text-brand-300"
         >
-          <FaGithubAlt size={22} />
+          <LuGithub size={22} />
         </a>
       </div>
 

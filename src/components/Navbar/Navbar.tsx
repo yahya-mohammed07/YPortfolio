@@ -1,9 +1,6 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import { MdOutlineClose } from "react-icons/md";
-import { PiCoffeeLight } from "react-icons/pi";
-import { LuMoon, LuSun } from "react-icons/lu";
-import useIsNavOpenState, { useThemeState } from "../../states/openState";
+import { LuCoffee, LuMenu, LuMoon, LuSun, LuX } from "react-icons/lu";
+import { useTheme } from "../../hooks/useTheme";
 
 const SECTIONS = [
   { id: "section_about", label: "About" },
@@ -68,31 +65,46 @@ const NavLink: React.FC<NavLinkType> = ({ href, active, onClick, children }) => 
   </li>
 );
 
-const CoffeeButton = ({ className = "" }: { className?: string }) => (
+const CoffeeButton = ({
+  className = "",
+  compact = false,
+}: {
+  className?: string;
+  compact?: boolean;
+}) => (
   <a
     href={COFFEE_URL}
     target="_blank"
     rel="noopener noreferrer"
     className={`inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2 text-base font-semibold
-      text-brand-50 shadow-sm transition duration-200 hover:bg-brand-600 hover:shadow-md
-      active:scale-[0.98] dark:bg-brand-600 dark:hover:bg-brand-500 ${className}`}
+      text-brand-50 shadow-sm transition-[background-color,box-shadow,transform] duration-200
+      hover:bg-brand-600 hover:shadow-md active:scale-[0.98]
+      dark:bg-brand-600 dark:hover:bg-brand-500 ${className}`}
   >
-    <span>Buy Me A Coffee</span>
-    <PiCoffeeLight size={22} aria-hidden="true" />
+    {/* Below xl the full label crowds the nav links out */}
+    <span className={compact ? "hidden xl:inline" : ""}>Buy Me A Coffee</span>
+    {compact && <span className="xl:hidden">Coffee</span>}
+    <LuCoffee size={20} aria-hidden="true" />
   </a>
 );
 
-const ThemeToggle = () => {
-  const { theme, toggleTheme } = useThemeState();
-  const isDark = theme === "dark";
-
+/* Theme state is owned by Navbar and passed in: the desktop and mobile
+   toggles are both mounted at once, so separate state would leave the hidden
+   one showing a stale icon after a resize. */
+const ThemeToggle = ({
+  isDark,
+  onToggle,
+}: {
+  isDark: boolean;
+  onToggle: () => void;
+}) => {
   return (
     <button
       type="button"
-      onClick={toggleTheme}
+      onClick={onToggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       title={isDark ? "Light mode" : "Dark mode"}
-      className="rounded-lg border border-stone-200 bg-white/70 p-2 text-stone-600 transition
+      className="rounded-lg border border-stone-200 bg-white/70 p-2 text-stone-600 transition-colors
         hover:border-brand-400 hover:text-brand-700
         dark:border-stone-700 dark:bg-stone-800/70 dark:text-stone-300 dark:hover:text-brand-400"
     >
@@ -102,8 +114,10 @@ const ThemeToggle = () => {
 };
 
 const Navbar = () => {
-  const { isNavOpen, setNavOpen } = useIsNavOpenState();
+  const [isNavOpen, setNavOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const active = useActiveSection();
+  const isDark = theme === "dark";
 
   // Lock background scroll and allow Escape to close while the drawer is open
   useEffect(() => {
@@ -119,15 +133,15 @@ const Navbar = () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [isNavOpen, setNavOpen]);
+  }, [isNavOpen]);
 
   const closeNav = () => setNavOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-stone-200/70 bg-stone-50/80 backdrop-blur-md dark:border-stone-800/80 dark:bg-ink/80">
+    <header className="sticky top-0 z-50 border-b border-stone-200/70 bg-stone-50/85 backdrop-blur-md dark:border-stone-800/80 dark:bg-ink/85">
       <nav
         aria-label="Main"
-        className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3"
+        className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-5"
       >
         <a
           href="#section_about"
@@ -137,7 +151,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop */}
-        <ul className="hidden list-none items-center gap-1 text-base lg:text-lg md:flex">
+        <ul className="hidden list-none items-center gap-1 text-base md:flex lg:text-lg">
           {SECTIONS.map(({ id, label }) => (
             <NavLink key={id} href={`#${id}`} active={active === id}>
               {label}
@@ -146,28 +160,24 @@ const Navbar = () => {
         </ul>
 
         <div className="hidden items-center gap-3 md:flex">
-          <ThemeToggle />
-          <CoffeeButton />
+          <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+          <CoffeeButton compact />
         </div>
 
         {/* Mobile */}
         <div className="flex items-center gap-2 md:hidden">
-          <ThemeToggle />
+          <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
           <button
             type="button"
-            onClick={() => setNavOpen(!isNavOpen)}
+            onClick={() => setNavOpen((open) => !open)}
             aria-label={isNavOpen ? "Close menu" : "Open menu"}
             aria-expanded={isNavOpen}
             aria-controls="mobile-menu"
-            className="rounded-lg border border-stone-200 bg-white/70 p-2 text-stone-700 transition
+            className="rounded-lg border border-stone-200 bg-white/70 p-2 text-stone-700 transition-colors
               hover:border-brand-400 hover:text-brand-700
               dark:border-stone-700 dark:bg-stone-800/70 dark:text-stone-200"
           >
-            {isNavOpen ? (
-              <MdOutlineClose size={22} />
-            ) : (
-              <HiOutlineMenuAlt3 size={22} />
-            )}
+            {isNavOpen ? <LuX size={22} /> : <LuMenu size={22} />}
           </button>
         </div>
       </nav>
@@ -176,9 +186,9 @@ const Navbar = () => {
       {isNavOpen && (
         <div
           id="mobile-menu"
-          className="animate-slide-down border-t border-stone-200/70 bg-stone-50/95 backdrop-blur-md md:hidden dark:border-stone-800 dark:bg-ink/95"
+          className="animate-slide-down border-t border-stone-200/70 bg-stone-50/95 md:hidden dark:border-stone-800 dark:bg-ink/95"
         >
-          <ul className="mx-auto flex max-w-7xl list-none flex-col gap-1 px-5 py-4 text-xl">
+          <ul className="mx-auto flex max-w-7xl list-none flex-col gap-1 px-4 py-4 text-xl sm:px-5">
             {SECTIONS.map(({ id, label }) => (
               <NavLink
                 key={id}
@@ -190,7 +200,7 @@ const Navbar = () => {
               </NavLink>
             ))}
           </ul>
-          <div className="px-5 pb-6">
+          <div className="px-4 pb-6 sm:px-5">
             <CoffeeButton className="w-full justify-center" />
           </div>
         </div>
