@@ -1,138 +1,201 @@
-import React, { ReactNode } from "react";
-import styles from "./navbar.module.css";
-import { GiHamburgerMenu } from "react-icons/gi";
-import useIsNavOpenState from "../../states/openState";
+import React, { ReactNode, useEffect, useState } from "react";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { MdOutlineClose } from "react-icons/md";
 import { PiCoffeeLight } from "react-icons/pi";
+import { LuMoon, LuSun } from "react-icons/lu";
+import useIsNavOpenState, { useThemeState } from "../../states/openState";
 
-interface CustomLinkType {
+const SECTIONS = [
+  { id: "section_about", label: "About" },
+  { id: "section_skills", label: "Skills" },
+  { id: "section_project", label: "Projects" },
+  { id: "section_contact", label: "Contact" },
+];
+
+const COFFEE_URL = "https://buymeacoffee.com/yahyabaqer";
+
+/** Highlights the nav link matching the section currently in view. */
+const useActiveSection = () => {
+  const [active, setActive] = useState(SECTIONS[0].id);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] }
+    );
+
+    SECTIONS.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return active;
+};
+
+interface NavLinkType {
   href: string;
+  active?: boolean;
+  onClick?: () => void;
   children: ReactNode;
 }
 
-const CustomLinkMobile: React.FC<CustomLinkType> = ({ href, children }) => {
-  return (
-    <li className={`${styles.list} p-6 text-3xl`}>
-      <a className={styles.linkA} href={href}>
-        {children}
-      </a>
-    </li>
-  );
-};
+const NavLink: React.FC<NavLinkType> = ({ href, active, onClick, children }) => (
+  <li>
+    <a
+      href={href}
+      onClick={onClick}
+      aria-current={active ? "page" : undefined}
+      className={`relative block rounded-lg px-3 py-2 font-Nunito font-semibold transition-colors
+        after:absolute after:bottom-1 after:left-3 after:right-3 after:h-0.5 after:origin-left
+        after:rounded-full after:bg-brand-600 after:transition-transform after:duration-200
+        hover:text-brand-700 dark:hover:text-brand-400
+        ${
+          active
+            ? "text-brand-800 after:scale-x-100 dark:text-brand-400"
+            : "text-stone-600 after:scale-x-0 dark:text-stone-300"
+        }`}
+    >
+      {children}
+    </a>
+  </li>
+);
 
-// MobileNavbar component for smaller screens
-const MobileNavbar = () => {
-  const { isNavOpen, setNavOpen } = useIsNavOpenState();
+const CoffeeButton = ({ className = "" }: { className?: string }) => (
+  <a
+    href={COFFEE_URL}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2 text-base font-semibold
+      text-brand-50 shadow-sm transition duration-200 hover:bg-brand-600 hover:shadow-md
+      active:scale-[0.98] dark:bg-brand-600 dark:hover:bg-brand-500 ${className}`}
+  >
+    <span>Buy Me A Coffee</span>
+    <PiCoffeeLight size={22} aria-hidden="true" />
+  </a>
+);
 
-  const toggleMobileNav = () => {
-    setNavOpen(!isNavOpen);
-  };
-  // box to hold col of urls hidden in large screens
-  // top-full class ensures it starts below the top edge of its containing block.
-  // right-0 class places it against the right edge
-  // z-10 class ensures it appears above other elements with a lower z-index.
-  // this should
-  return (
-    <>
-      {open && (
-        <div
-          className={
-            !open
-              ? "hidden"
-              : "sm:hidden absolute  top-10 right-0 left-0 bg-neutral-50 shadow-xl border z-50"
-          }
-        >
-          <ul
-            className="flex flex-col text-sm h-dvh w-svw p-2 text-right list-none"
-            onClick={toggleMobileNav}
-          >
-            <CustomLinkMobile href="#section_about">About</CustomLinkMobile>
-            <CustomLinkMobile href="#section_skills">Skills</CustomLinkMobile>
-            <CustomLinkMobile href="#section_project">
-              Projects
-            </CustomLinkMobile>
-            <CustomLinkMobile href="#section_contact">
-              Contact Me :)
-            </CustomLinkMobile>
-              <div className="text-center flex justify-end mr-10 mt-8 sm:text-2xl text-xl">
-                <a
-                  href="https://buymeacoffee.com/yahyabaqer"
-                  target="_blank"
-                  className="text-white"
-                >
-                  <button className="flex justify-center items-center p-2 gap-1 -top-4 bg-orange-600 -outline-offset-1 rounded-md border-0 cursor-pointer transition-all outline outline-2 hover:bg-transparent hover:text-orange-900 -mt-2">
-                    <p className="text">Buy Me A Coffee</p>
-                    <PiCoffeeLight size={30} title="Buy Me A Coffee" />
-                  </button>
-                </a>
-              </div>
-          </ul>
-        </div>
-      )}
-    </>
-  );
-};
+const ThemeToggle = () => {
+  const { theme, toggleTheme } = useThemeState();
+  const isDark = theme === "dark";
 
-const CustomLink: React.FC<CustomLinkType> = ({ href, children }) => {
   return (
-    <li className={styles.list}>
-      <a className={styles.linkA} href={href}>
-        {children}
-      </a>
-    </li>
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Light mode" : "Dark mode"}
+      className="rounded-lg border border-stone-200 bg-white/70 p-2 text-stone-600 transition
+        hover:border-brand-400 hover:text-brand-700
+        dark:border-stone-700 dark:bg-stone-800/70 dark:text-stone-300 dark:hover:text-brand-400"
+    >
+      {isDark ? <LuSun size={20} /> : <LuMoon size={20} />}
+    </button>
   );
 };
 
 const Navbar = () => {
   const { isNavOpen, setNavOpen } = useIsNavOpenState();
-  const toggleNavbar = () => setNavOpen(!isNavOpen);
+  const active = useActiveSection();
+
+  // Lock background scroll and allow Escape to close while the drawer is open
+  useEffect(() => {
+    if (!isNavOpen) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setNavOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [isNavOpen, setNavOpen]);
+
+  const closeNav = () => setNavOpen(false);
+
   return (
-    <>
-      <header>
-        <nav
-          className={`flex max-w-7xl mx-auto my-5 justify-between p-1 drop-shadow-sm text-sm lg:text-2xl text-gray-700 font-Nunito`}
+    <header className="sticky top-0 z-50 border-b border-stone-200/70 bg-stone-50/80 backdrop-blur-md dark:border-stone-800/80 dark:bg-ink/80">
+      <nav
+        aria-label="Main"
+        className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3"
+      >
+        <a
+          href="#section_about"
+          className="font-Nunito text-2xl font-bold tracking-tight text-stone-800 transition-colors hover:text-brand-700 md:text-3xl dark:text-stone-100 dark:hover:text-brand-400"
         >
-          <a
-            href="#"
-            className={`${styles.linkA} -mt-2 text-3xl md:text-4xl font-bold`}
-          >
-            Yahya
-          </a>
+          Yahya<span className="text-brand-600">.</span>
+        </a>
+
+        {/* Desktop */}
+        <ul className="hidden list-none items-center gap-1 text-base lg:text-lg md:flex">
+          {SECTIONS.map(({ id, label }) => (
+            <NavLink key={id} href={`#${id}`} active={active === id}>
+              {label}
+            </NavLink>
+          ))}
+        </ul>
+
+        <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
+          <CoffeeButton />
+        </div>
+
+        {/* Mobile */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
           <button
-            //  hide in xl,lg
-            className="sm:hidden -mt-1 active:bg-slate-400 focus:outline-none hover:rounded-lg hover:bg-slate-300 p-2 text-xl"
-            onClick={toggleNavbar}
+            type="button"
+            onClick={() => setNavOpen(!isNavOpen)}
+            aria-label={isNavOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isNavOpen}
+            aria-controls="mobile-menu"
+            className="rounded-lg border border-stone-200 bg-white/70 p-2 text-stone-700 transition
+              hover:border-brand-400 hover:text-brand-700
+              dark:border-stone-700 dark:bg-stone-800/70 dark:text-stone-200"
           >
-            {isNavOpen ? <MdOutlineClose /> : <GiHamburgerMenu />}
+            {isNavOpen ? (
+              <MdOutlineClose size={22} />
+            ) : (
+              <HiOutlineMenuAlt3 size={22} />
+            )}
           </button>
-          {/*if click it true then show mobile navbar*/}
-          {isNavOpen && <MobileNavbar />}
-          {/*only show when screen sm size and hide show when clicked*/}
-          <ul className={`sm:flex gap-1 list-none hidden`}>
-            <CustomLink href="#section_about">About</CustomLink>
-            <CustomLink href="#section_skills">Skills</CustomLink>
-            <CustomLink href="#section_project">Projects</CustomLink>
-            <CustomLink href="#section_contact">Contact Me :)</CustomLink>
-            <CustomLink href="#section_coffey">
-              <a
-                href="https://buymeacoffee.com/yahyabaqer"
-                target="_blank"
-                className="text-white"
+        </div>
+      </nav>
+
+      {/* Mobile drawer */}
+      {isNavOpen && (
+        <div
+          id="mobile-menu"
+          className="animate-slide-down border-t border-stone-200/70 bg-stone-50/95 backdrop-blur-md md:hidden dark:border-stone-800 dark:bg-ink/95"
+        >
+          <ul className="mx-auto flex max-w-7xl list-none flex-col gap-1 px-5 py-4 text-xl">
+            {SECTIONS.map(({ id, label }) => (
+              <NavLink
+                key={id}
+                href={`#${id}`}
+                active={active === id}
+                onClick={closeNav}
               >
-                <button className="flex justify-center items-center p-2 gap-1 -top-4 bg-orange-600 -outline-offset-1 rounded-md border-0 cursor-pointer transition-all outline outline-2 hover:bg-transparent hover:text-orange-900 -mt-2">
-                  <p className="text">Buy Me A Coffee</p>
-                  <PiCoffeeLight
-                    size={30}
-                    title="Buy Me A Coffee"
-                    className=""
-                  />
-                </button>
-              </a>
-            </CustomLink>
+                {label}
+              </NavLink>
+            ))}
           </ul>
-        </nav>
-      </header>
-    </>
+          <div className="px-5 pb-6">
+            <CoffeeButton className="w-full justify-center" />
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 

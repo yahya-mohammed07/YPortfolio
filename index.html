@@ -1,38 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="description" content="Yahya Mohammed's Personal Portfolio" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yahya Mohammed — Software & AI Developer</title>
+    <meta
+      name="description"
+      content="Yahya M. Baqer — software developer with 3 years of experience building AI, web, mobile and desktop applications."
+    />
+    <meta name="theme-color" content="#f97316" />
+    <meta name="author" content="Yahya M. Baqer" />
+
+    <!-- Social preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Yahya Mohammed — Software & AI Developer" />
+    <meta
+      property="og:description"
+      content="Portfolio of Yahya M. Baqer: AI/RAG tools, web, mobile and desktop applications."
+    />
+    <meta name="twitter:card" content="summary" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%239a3412'/%3E%3Ctext x='50' y='72' font-size='64' font-family='Verdana,sans-serif' font-weight='bold' fill='%23fff7ed' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-      rel="stylesheet"
-    />
-    <title>Yahya Mohammed</title>
+
     <meta
       name="google-site-verification"
       content="q6CPS3x-un0fMb0CUSjc1zOsFUrhtt95mvkMhX5ef7c"
     />
+
+    <!-- Light is the default; only an explicit saved choice turns on dark mode.
+         Applied before paint so dark mode never flashes white. -->
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {
+          /* localStorage blocked — fall back to light */
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
