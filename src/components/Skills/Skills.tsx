@@ -55,9 +55,9 @@ const SKILLS: Skill[] = [
     items: ["Python", "Automation", "Parsing"],
   },
   {
-    title: "Translation",
+    title: "Languages",
     icon: <LuLanguages size={20} />,
-    items: ["English", "Arabic"],
+    items: ["English", "Arabic", "Turkmen", "Spanish (basic)"],
   },
 ];
 
