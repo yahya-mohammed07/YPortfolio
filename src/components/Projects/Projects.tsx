@@ -15,6 +15,35 @@ interface Project {
 
 const PROJECTS: Project[] = [
   {
+    title: "Shahadaty",
+    description:
+      "A multi-tenant certificate platform: import a roster from Excel or CSV, issue a whole batch from a themed SVG template, and export print-ready PDF, PNG or ZIP entirely in the browser. Every certificate carries a QR code to its own public verification page, and Arabic names can be transliterated from a 77k-name lookup table.",
+    tech: [
+      "React 19 (Ts)",
+      "TailwindCSS",
+      "PocketBase",
+      "Cloudflare Workers",
+      "SVG & PDF",
+    ],
+    hasWebsite: true,
+    websiteLink: "https://shahadaty.com",
+    websiteLabel: "Live site",
+    openSource: false,
+    githubLink: "",
+    featured: true,
+  },
+  {
+    title: "Shahadaty Backend",
+    description:
+      "The API and database behind Shahadaty: PocketBase with per-org access rules, JSVM hooks for quotas and role locking, and versioned schema migrations. Runs as a hardened systemd service on a VPS with its own Let's Encrypt certificates, Docker and Fly.io deploy paths kept alongside.",
+    tech: ["PocketBase", "JavaScript (JSVM)", "SQLite", "Docker", "systemd"],
+    hasWebsite: false,
+    websiteLink: "",
+    openSource: false,
+    githubLink: "",
+    featured: true,
+  },
+  {
     title: "Focus Timer",
     description:
       "A focus timer app on Google Play with presets, session history, a floating overlay bubble, local notifications and custom sound effects.",
