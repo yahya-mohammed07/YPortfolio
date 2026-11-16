@@ -37,9 +37,9 @@ const BackToTop = () => {
         bottom: "max(1.25rem, env(safe-area-inset-bottom))",
         right: "max(1.25rem, env(safe-area-inset-right))",
       }}
-      className={`fixed z-40 rounded-full bg-brand-800 p-3 text-brand-50 shadow-lg
+      className={`fixed z-40 rounded-full bg-brand-600 p-3 text-white shadow-md
         transition-[opacity,transform] duration-300 ease-out hover:bg-brand-700 active:scale-95
-        dark:bg-brand-600 dark:hover:bg-brand-500
+        dark:bg-ochre-400 dark:text-ink dark:hover:bg-ochre-300
         ${
           visible
             ? "translate-y-0 opacity-100"

@@ -8,29 +8,35 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        Fredoka: ['Fredoka', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        Roboto: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        Nunito: ['Nunito', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        sans: ['Nunito', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        // Readex Pro covers Latin and Arabic, so mixed-script text shares one voice
+        sans: ['Readex Pro', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // Warm accent kept from the original orange-800/900 look
+        // Lapis — the glazed blue of the Ishtar Gate
         brand: {
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#f97316',
-          600: '#ea580c',
-          700: '#c2410c',
-          800: '#9a3412',
-          900: '#7c2d12',
-          950: '#431407',
+          50: '#eef2fb',
+          100: '#dce4f7',
+          200: '#b9c8ee',
+          300: '#8ea6e2',
+          400: '#5f7fd3',
+          500: '#3d60c1',
+          600: '#2747a8',
+          700: '#1f3a8c',
+          800: '#1a3070',
+          900: '#16275a',
+          950: '#0d1630',
+        },
+        // Glaze gold — decoration on light, text accent on dark
+        ochre: {
+          200: '#f2e3bf',
+          300: '#e9c77a',
+          400: '#e3b550',
+          500: '#c8952e',
+          600: '#a67722',
         },
         ink: {
-          DEFAULT: '#1c1917',
-          soft: '#292524',
+          DEFAULT: '#0d1630',
+          soft: '#142042',
         },
       },
       keyframes: {

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { LuCheck, LuCopy, LuGithub, LuLinkedin, LuMail } from "react-icons/lu";
+import { LuCheck, LuCopy, LuGithub, LuLinkedin } from "react-icons/lu";
 
 const EMAIL = "yahyabaqer@proton.me";
 
@@ -31,76 +31,60 @@ export default function Contact() {
   const copied = status === "copied";
 
   return (
-    <div className="mx-auto mt-10 max-w-xl px-4 sm:px-5">
-      <div className="surface p-6 text-center sm:p-8">
-        <p className="font-Fredoka text-lg text-stone-600 dark:text-stone-400">
-          Got a project in mind, or just want to say hi? My inbox is open.
-        </p>
+    <div className="mx-auto mt-6 max-w-6xl px-4 sm:px-5">
+      <p className="max-w-xl text-lg font-light text-slate-700 dark:text-slate-300">
+        For work, a project, or a question about something here, email is the
+        fastest way to reach me.
+      </p>
 
-        <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-          <a
-            href={`mailto:${EMAIL}`}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-800 px-5 py-3
-              font-Roboto text-sm font-medium text-brand-50 shadow-sm
-              transition-[background-color,box-shadow,transform] duration-200
-              hover:bg-brand-700 hover:shadow-md active:scale-[0.98] sm:w-auto sm:text-base
-              dark:bg-brand-600 dark:hover:bg-brand-500"
-          >
-            <LuMail size={20} aria-hidden="true" className="shrink-0" />
-            <span className="truncate">{EMAIL}</span>
-          </a>
-          <button
-            type="button"
-            onClick={copyEmail}
-            aria-label="Copy email address"
-            title="Copy email address"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-stone-300
-              bg-white/60 px-5 py-3 font-Roboto text-base font-medium text-stone-700
-              transition-[color,border-color,transform] duration-200
-              hover:border-brand-500 hover:text-brand-800 active:scale-[0.98] sm:w-auto
-              dark:border-stone-600 dark:bg-stone-800/60 dark:text-stone-200
-              dark:hover:border-brand-400 dark:hover:text-brand-300"
-          >
-            {copied ? <LuCheck size={20} /> : <LuCopy size={20} />}
-            <span className="sm:hidden">{copied ? "Copied" : "Copy"}</span>
-          </button>
-        </div>
-
-        <p
-          role="status"
-          aria-live="polite"
-          className={`mt-3 font-Nunito text-sm transition-opacity duration-200
-            ${status ? "opacity-100" : "opacity-0"}
-            ${status === "failed" ? "text-brand-700 dark:text-brand-400" : "text-stone-500 dark:text-stone-400"}`}
+      {/* The address itself is the call to action, set large so it reads at a glance */}
+      <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3">
+        <a
+          href={`mailto:${EMAIL}`}
+          className="break-all text-3xl font-semibold tracking-tight text-brand-700 underline decoration-ochre-500 decoration-2 underline-offset-[0.2em] transition-colors hover:text-brand-900 sm:text-4xl md:text-5xl dark:text-white dark:decoration-ochre-400 dark:hover:text-ochre-300"
         >
-          {status === "copied" && "Email copied to clipboard"}
-          {status === "failed" && "Couldn't copy — please copy it manually"}
-          {/* Keeps the line's height reserved so nothing shifts when it appears */}
-          {!status && " "}
-        </p>
+          {EMAIL}
+        </a>
+        <button
+          type="button"
+          onClick={copyEmail}
+          className="btn-secondary btn-sm"
+        >
+          {copied ? <LuCheck size={16} aria-hidden="true" /> : <LuCopy size={16} aria-hidden="true" />}
+          {copied ? "Copied" : "Copy address"}
+        </button>
+      </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-stone-200/70 pt-5 dark:border-stone-700/70">
-          <a
-            href="https://github.com/yahya-mohammed07"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-Nunito text-sm font-semibold text-stone-500
-              transition-colors hover:text-brand-700 dark:text-stone-400 dark:hover:text-brand-400"
-          >
-            <LuGithub size={18} aria-hidden="true" />
-            github.com/yahya-mohammed07
-          </a>
-          <a
-            href="https://www.linkedin.com/in/yahyabaqer"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-Nunito text-sm font-semibold text-stone-500
-              transition-colors hover:text-brand-700 dark:text-stone-400 dark:hover:text-brand-400"
-          >
-            <LuLinkedin size={18} aria-hidden="true" />
-            linkedin.com/in/yahyabaqer
-          </a>
-        </div>
+      <p
+        role="status"
+        aria-live="polite"
+        className={`mt-3 min-h-[1.25rem] text-sm ${
+          status === "failed" ? "text-red-700 dark:text-red-400" : "sr-only"
+        }`}
+      >
+        {status === "copied" && "Email address copied"}
+        {status === "failed" && "Copy failed. Select the address above and copy it manually."}
+      </p>
+
+      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-slate-600 dark:text-slate-400">
+        <a
+          href="https://github.com/yahya-mohammed07"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-link inline-flex items-center gap-2"
+        >
+          <LuGithub size={18} aria-hidden="true" />
+          github.com/yahya-mohammed07
+        </a>
+        <a
+          href="https://www.linkedin.com/in/yahyabaqer"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-link inline-flex items-center gap-2"
+        >
+          <LuLinkedin size={18} aria-hidden="true" />
+          linkedin.com/in/yahyabaqer
+        </a>
       </div>
     </div>
   );

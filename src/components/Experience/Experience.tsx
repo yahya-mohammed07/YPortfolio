@@ -1,5 +1,3 @@
-import Reveal from "../Elemets/Reveal";
-
 interface Entry {
   role: string;
   org: string;
@@ -48,22 +46,21 @@ const EDUCATION: Entry[] = [
 
 const Column = ({ heading, entries }: { heading: string; entries: Entry[] }) => (
   <div>
-    <h3 className="font-Nunito text-sm font-bold uppercase tracking-widest text-brand-700 dark:text-brand-400">
-      {heading}
-    </h3>
-    <ol className="mt-4 flex list-none flex-col gap-4">
+    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{heading}</h3>
+    {/* A real sequence, so a timeline rail: newest first */}
+    <ol className="mt-5 flex list-none flex-col gap-8 border-l border-slate-200 dark:border-brand-900">
       {entries.map((e) => (
-        <li key={`${e.org}-${e.period}`} className="surface p-5 text-left">
-          <p className="font-Nunito text-xs font-semibold text-stone-500 dark:text-stone-400">
-            {e.period}
-          </p>
-          <h4 className="mt-1 font-Nunito text-lg font-bold text-brand-900 dark:text-brand-400">
+        <li key={`${e.org}-${e.period}`} className="relative pl-7">
+          <span
+            aria-hidden="true"
+            className="absolute -left-[6px] top-1.5 h-[11px] w-[11px] rounded-full border-2 border-ochre-500 bg-slate-50 dark:border-ochre-400 dark:bg-ink"
+          />
+          <time className="text-sm text-slate-500 dark:text-slate-400">{e.period}</time>
+          <h4 className="mt-1 text-lg font-semibold leading-snug text-slate-900 dark:text-white">
             {e.role}
           </h4>
-          <p className="font-Nunito text-sm font-semibold text-stone-600 dark:text-stone-300">
-            {e.org}
-          </p>
-          <p className="mt-2 font-Fredoka text-[0.95rem] leading-relaxed text-stone-600 dark:text-stone-400">
+          <p className="font-medium text-brand-700 dark:text-brand-300">{e.org}</p>
+          <p className="mt-2 max-w-xl font-light leading-relaxed text-slate-700 dark:text-slate-300">
             {e.detail}
           </p>
         </li>
@@ -73,12 +70,10 @@ const Column = ({ heading, entries }: { heading: string; entries: Entry[] }) => 
 );
 
 const Experience = () => (
-  <Reveal>
-    <div className="mx-auto mt-10 grid max-w-6xl gap-8 px-4 sm:px-5 lg:grid-cols-[3fr_2fr]">
-      <Column heading="Work" entries={WORK} />
-      <Column heading="Education" entries={EDUCATION} />
-    </div>
-  </Reveal>
+  <div className="mx-auto mt-8 grid max-w-6xl gap-12 px-4 sm:px-5 lg:grid-cols-[3fr_2fr]">
+    <Column heading="Work" entries={WORK} />
+    <Column heading="Education" entries={EDUCATION} />
+  </div>
 );
 
 export default Experience;

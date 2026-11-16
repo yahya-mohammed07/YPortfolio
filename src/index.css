@@ -19,39 +19,14 @@
     scroll-margin-top: 4.5rem;
   }
 
-  @screen md {
-    section[id] {
-      scroll-margin-top: 5.5rem;
-    }
-  }
-
   body {
-    @apply bg-stone-50 text-stone-800 antialiased dark:bg-ink dark:text-stone-200;
-  }
-
-  /* The ambient gradient lives on its own fixed layer instead of
-     `background-attachment: fixed` on the body, which forces the browser to
-     repaint the whole viewport on every scroll frame. */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image:
-      radial-gradient(60rem 30rem at 50% -10rem, rgba(249, 115, 22, 0.1), transparent 70%),
-      radial-gradient(40rem 24rem at 100% 20%, rgba(120, 113, 108, 0.08), transparent 70%);
-  }
-
-  .dark body::before {
-    background-image:
-      radial-gradient(60rem 30rem at 50% -10rem, rgba(249, 115, 22, 0.16), transparent 70%),
-      radial-gradient(40rem 24rem at 100% 20%, rgba(168, 162, 158, 0.08), transparent 70%);
+    @apply bg-slate-50 text-slate-800 antialiased dark:bg-ink dark:text-slate-200;
+    font-feature-settings: "ss01";
   }
 
   /* Visible, consistent keyboard focus everywhere */
   :focus-visible {
-    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-stone-50 rounded-sm dark:ring-offset-ink;
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-slate-50 rounded-sm dark:ring-offset-ink;
   }
 
   ::selection {
@@ -68,63 +43,62 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-stone-300 dark:bg-stone-700;
+    @apply rounded-full bg-slate-300 dark:bg-slate-700;
   }
 
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-brand-400 dark:bg-brand-700;
   }
+
+  /* Dates and counts line up in columns */
+  time {
+    font-variant-numeric: tabular-nums;
+  }
 }
 
 @layer components {
-  /* No backdrop-blur here: these sit over an opaque body, so the blur costs a
-     GPU pass per card for no visible gain. */
+  /* Radius follows hierarchy: buttons are pills, cards are softly rounded,
+     tags are nearly square. */
   .surface {
-    @apply rounded-2xl border border-stone-200/80 bg-white/80 shadow-sm
-           dark:border-stone-700/70 dark:bg-stone-900/70;
+    @apply rounded-2xl border border-slate-200 bg-white
+           dark:border-brand-900 dark:bg-ink-soft;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[0.95rem] font-medium
+           transition-colors duration-150;
+  }
+
+  .btn-primary {
+    @apply bg-brand-600 text-white hover:bg-brand-700
+           dark:bg-ochre-400 dark:text-ink dark:hover:bg-ochre-300;
+  }
+
+  .btn-secondary {
+    @apply border border-slate-300 text-slate-800 hover:border-brand-600 hover:text-brand-700
+           dark:border-brand-800 dark:text-slate-100 dark:hover:border-ochre-400 dark:hover:text-ochre-300;
+  }
+
+  .btn-sm {
+    @apply px-3.5 py-1.5 text-sm;
   }
 
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-stone-200 bg-white/70 px-3 py-1
-           text-xs font-medium text-stone-600 dark:border-stone-700 dark:bg-stone-800/70 dark:text-stone-300;
+    @apply inline-flex items-center rounded-md bg-brand-50 px-2 py-0.5 text-xs font-medium
+           text-brand-800 dark:bg-brand-900/70 dark:text-brand-200;
   }
 
-  /* Lift-on-hover for cards. Only transitions compositor-friendly properties,
-     and only on devices that actually have a hover cursor — on touch the
-     `:hover` state sticks after a tap. */
-  .card-lift {
-    @apply transition-[transform,box-shadow,border-color] duration-200 ease-out;
+  .text-link {
+    @apply underline decoration-slate-300 decoration-1 underline-offset-4 transition-colors
+           hover:text-brand-700 hover:decoration-brand-600
+           dark:decoration-brand-700 dark:hover:text-ochre-300 dark:hover:decoration-ochre-400;
   }
-
-  @media (hover: hover) and (pointer: fine) {
-    .card-lift:hover {
-      @apply -translate-y-1;
-    }
-  }
-}
-
-/* Scroll-reveal: hidden until observed, then animated in */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.reveal-visible {
-  opacity: 1;
-  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  .reveal,
-  .reveal-visible {
-    opacity: 1;
-    transform: none;
-    transition: none;
   }
 
   *,

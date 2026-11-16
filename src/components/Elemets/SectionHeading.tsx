@@ -6,21 +6,18 @@ interface SectionHeadingType {
   id?: string;
 }
 
+/** Left-aligned on the same column as the content below it. */
 const SectionHeading: React.FC<SectionHeadingType> = ({ title, subtitle, id }) => {
   return (
-    <div className="mx-auto max-w-2xl px-5 text-center">
+    <div className="mx-auto max-w-6xl px-4 sm:px-5">
       <h2
         id={id}
-        className="font-Roboto text-3xl font-semibold tracking-tight text-stone-800 md:text-4xl dark:text-stone-100"
+        className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl dark:text-white"
       >
         {title}
       </h2>
-      <div
-        aria-hidden="true"
-        className="mx-auto mt-3 h-1 w-14 rounded-full bg-gradient-to-r from-brand-500 to-brand-800"
-      />
       {subtitle && (
-        <p className="mt-4 font-Fredoka text-base text-stone-500 dark:text-stone-400">
+        <p className="mt-3 max-w-2xl text-base font-light text-slate-600 sm:text-lg dark:text-slate-400">
           {subtitle}
         </p>
       )}

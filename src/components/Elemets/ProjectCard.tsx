@@ -1,119 +1,95 @@
 import React from "react";
-import { LuExternalLink, LuGithub, LuLock, LuSparkles } from "react-icons/lu";
+import { LuExternalLink, LuGithub, LuLock } from "react-icons/lu";
+import type { Project } from "../Projects/projects.data";
 
-interface ProjectCardType {
-  openSource: boolean;
-  hasWebsite: boolean;
-  githubLink: string;
-  websiteLink: string;
-  /** Label for the external link button, e.g. "Google Play" or "Live site" */
-  websiteLabel?: string;
-  description: string;
-  tech: string[];
-  title: string;
-  featured?: boolean;
-  period?: string;
-  impact?: string;
+interface ProjectCardType extends Project {
+  /** The first featured project gets the full row and a wider text measure */
+  lead?: boolean;
 }
 
-const ProjectCard: React.FC<ProjectCardType> = ({
-  hasWebsite,
-  openSource,
-  githubLink,
-  websiteLink,
-  websiteLabel = "Live site",
-  description,
-  tech,
-  title,
-  featured = false,
-  period,
-  impact,
-}) => {
+/** Live-site / source / closed-source actions, shared by cards and rows. */
+export const ProjectLinks: React.FC<
+  Pick<Project, "title" | "hasWebsite" | "websiteLink" | "websiteLabel" | "openSource" | "githubLink"> & {
+    compact?: boolean;
+  }
+> = ({ title, hasWebsite, websiteLink, websiteLabel = "Live site", openSource, githubLink, compact }) => (
+  <div className="flex flex-wrap items-center gap-2">
+    {hasWebsite && (
+      <a
+        href={websiteLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${title}: ${websiteLabel}`}
+        className={compact ? "btn-secondary btn-sm" : "btn-primary btn-sm"}
+      >
+        <LuExternalLink size={15} aria-hidden="true" />
+        {websiteLabel}
+      </a>
+    )}
+    {openSource && (
+      <a
+        href={githubLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${title}: source code on GitHub`}
+        className="btn-secondary btn-sm"
+      >
+        <LuGithub size={15} aria-hidden="true" />
+        Source
+      </a>
+    )}
+    {!openSource && !compact && (
+      <span className="inline-flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
+        <LuLock size={14} aria-hidden="true" />
+        Closed source
+      </span>
+    )}
+  </div>
+);
+
+const ProjectCard: React.FC<ProjectCardType> = ({ lead = false, ...p }) => {
   return (
     <article
-      className={`surface card-lift group flex h-full flex-col overflow-hidden p-5 text-left sm:p-6
-        hover:shadow-lg
-        ${
-          featured
-            ? "border-brand-300 ring-1 ring-brand-200 dark:border-brand-800 dark:ring-brand-900"
-            : "hover:border-brand-300 dark:hover:border-brand-700"
-        }`}
+      className={`surface flex h-full flex-col p-6 transition-colors hover:border-brand-300 sm:p-7 dark:hover:border-brand-700
+        ${lead ? "md:col-span-2 md:grid md:grid-cols-[1fr_1.3fr] md:gap-x-10" : ""}`}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <h3 className="font-Nunito text-xl font-bold text-brand-900 md:text-2xl dark:text-brand-400">
-            {title}
+      <div>
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h3
+            className={`font-semibold tracking-tight text-slate-900 dark:text-white ${
+              lead ? "text-3xl" : "text-2xl"
+            }`}
+          >
+            {p.title}
           </h3>
-          {period && (
-            <p className="mt-0.5 font-Nunito text-xs font-semibold text-stone-500 dark:text-stone-400">
-              {period}
-            </p>
+          {p.period && (
+            <time className="text-sm text-slate-500 dark:text-slate-400">{p.period}</time>
           )}
         </div>
-        {featured && (
-          <span className="shrink-0 rounded-full bg-brand-100 px-2.5 py-1 font-Nunito text-[0.7rem] font-bold uppercase tracking-wide text-brand-800 dark:bg-brand-950 dark:text-brand-400">
-            Featured
-          </span>
+
+        {p.impact && (
+          <p className="mt-4 border-l-2 border-ochre-500 pl-3 font-medium leading-snug text-brand-800 dark:border-ochre-400 dark:text-ochre-300">
+            {p.impact}
+          </p>
         )}
       </div>
 
-      <p className="mt-3 flex-1 font-Fredoka text-[0.95rem] leading-relaxed text-stone-600 dark:text-stone-400">
-        {description}
-      </p>
-
-      {impact && (
-        <p className="mt-3 flex items-start gap-2 font-Nunito text-sm font-semibold text-brand-800 dark:text-brand-300">
-          <LuSparkles size={16} aria-hidden="true" className="mt-0.5 shrink-0" />
-          {impact}
+      <div className={`flex flex-1 flex-col ${lead ? "mt-4 md:mt-0" : "mt-4"}`}>
+        <p className="flex-1 font-light leading-relaxed text-slate-700 dark:text-slate-300">
+          {p.description}
         </p>
-      )}
 
-      <ul className="mt-5 flex list-none flex-wrap gap-1.5">
-        {tech.map((t) => (
-          <li key={t} className="chip">
-            {t}
-          </li>
-        ))}
-      </ul>
+        <ul className="mt-5 flex list-none flex-wrap gap-1.5" aria-label="Tech used">
+          {p.tech.map((t) => (
+            <li key={t} className="chip">
+              {t}
+            </li>
+          ))}
+        </ul>
 
-      <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-stone-200/70 pt-4 dark:border-stone-700/70">
-        {hasWebsite && (
-          <a
-            href={websiteLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${title} — ${websiteLabel}`}
-            className="inline-flex items-center gap-2 rounded-lg bg-brand-800 px-3 py-2 font-Roboto text-sm
-              font-medium text-brand-50 transition-[background-color,transform] duration-200
-              hover:bg-brand-700 active:scale-[0.98]
-              dark:bg-brand-600 dark:hover:bg-brand-500"
-          >
-            <LuExternalLink size={16} aria-hidden="true" />
-            {websiteLabel}
-          </a>
-        )}
-        {openSource && (
-          <a
-            href={githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${title} — source code on GitHub`}
-            className="inline-flex items-center gap-2 rounded-lg border border-stone-300 px-3 py-2
-              font-Roboto text-sm font-medium text-stone-700
-              transition-[color,border-color,transform] duration-200
-              hover:border-brand-500 hover:text-brand-800 active:scale-[0.98]
-              dark:border-stone-600 dark:text-stone-300 dark:hover:border-brand-400 dark:hover:text-brand-300"
-          >
-            <LuGithub size={16} aria-hidden="true" />
-            Source
-          </a>
-        )}
-        {!openSource && (
-          <span className="inline-flex items-center gap-1.5 font-Nunito text-xs font-semibold text-stone-500 dark:text-stone-400">
-            <LuLock size={14} aria-hidden="true" />
-            Closed source · demo on request
-          </span>
-        )}
+        <div className="mt-6">
+          <ProjectLinks {...p} />
+        </div>
       </div>
     </article>
   );
