@@ -4,6 +4,7 @@ import { useTheme } from "../../hooks/useTheme";
 
 const SECTIONS = [
   { id: "section_about", label: "About" },
+  { id: "section_experience", label: "Experience" },
   { id: "section_skills", label: "Skills" },
   { id: "section_project", label: "Projects" },
   { id: "section_contact", label: "Contact" },

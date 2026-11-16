@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { LuCheck, LuCopy, LuGithub, LuMail } from "react-icons/lu";
+import { LuCheck, LuCopy, LuGithub, LuLinkedin, LuMail } from "react-icons/lu";
 
 const EMAIL = "yahyabaqer@proton.me";
 
@@ -9,7 +9,7 @@ type Status = "" | "copied" | "failed";
 // mailto + copy-to-clipboard is enough.
 export default function Contact() {
   const [status, setStatus] = useState<Status>("");
-  const timer = useRef<number>();
+  const timer = useRef<number | undefined>(undefined);
 
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
@@ -79,7 +79,7 @@ export default function Contact() {
           {!status && " "}
         </p>
 
-        <div className="mt-4 border-t border-stone-200/70 pt-5 dark:border-stone-700/70">
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-stone-200/70 pt-5 dark:border-stone-700/70">
           <a
             href="https://github.com/yahya-mohammed07"
             target="_blank"
@@ -89,6 +89,16 @@ export default function Contact() {
           >
             <LuGithub size={18} aria-hidden="true" />
             github.com/yahya-mohammed07
+          </a>
+          <a
+            href="https://www.linkedin.com/in/yahyabaqer"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-Nunito text-sm font-semibold text-stone-500
+              transition-colors hover:text-brand-700 dark:text-stone-400 dark:hover:text-brand-400"
+          >
+            <LuLinkedin size={18} aria-hidden="true" />
+            linkedin.com/in/yahyabaqer
           </a>
         </div>
       </div>

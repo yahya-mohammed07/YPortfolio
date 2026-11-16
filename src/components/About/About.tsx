@@ -1,9 +1,24 @@
-import { LuBrainCircuit, LuCode, LuGithub, LuMail, LuSmartphone } from "react-icons/lu";
+import {
+  LuBrainCircuit,
+  LuCode,
+  LuDownload,
+  LuGithub,
+  LuLinkedin,
+  LuMail,
+  LuMapPin,
+  LuSmartphone,
+} from "react-icons/lu";
 
 const HIGHLIGHTS = [
   { icon: <LuBrainCircuit size={15} />, label: "AI / RAG" },
   { icon: <LuCode size={15} />, label: "Web & Backend" },
   { icon: <LuSmartphone size={15} />, label: "Mobile & Desktop" },
+];
+
+const CVS = [
+  { label: "Full-Stack", href: "/cv/Yahya-Baqer-CV-Full-Stack.pdf" },
+  { label: "Flutter / Mobile", href: "/cv/Yahya-Baqer-CV-Flutter-Mobile.pdf" },
+  { label: "ML Engineer", href: "/cv/Yahya-Baqer-CV-ML-Engineer.pdf" },
 ];
 
 const About = () => {
@@ -60,6 +75,17 @@ const About = () => {
           Get in touch
         </a>
         <a
+          href={CVS[0].href}
+          download
+          className="inline-flex items-center gap-2 rounded-xl border border-stone-300 bg-white/60 px-6 py-3
+            font-Roboto text-base font-medium text-stone-700 transition-[color,border-color] duration-200
+            hover:border-brand-500 hover:text-brand-800
+            dark:border-stone-600 dark:bg-stone-800/60 dark:text-stone-200 dark:hover:border-brand-400 dark:hover:text-brand-300"
+        >
+          <LuDownload size={20} aria-hidden="true" />
+          Download CV
+        </a>
+        <a
           href="https://github.com/yahya-mohammed07"
           target="_blank"
           rel="noopener noreferrer"
@@ -70,10 +96,38 @@ const About = () => {
         >
           <LuGithub size={22} />
         </a>
+        <a
+          href="https://www.linkedin.com/in/yahyabaqer"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn profile"
+          className="inline-flex items-center justify-center rounded-xl border border-stone-300 bg-white/60 p-3
+            text-stone-700 transition-[color,border-color] duration-200 hover:border-brand-500 hover:text-brand-800
+            dark:border-stone-600 dark:bg-stone-800/60 dark:text-stone-200 dark:hover:border-brand-400 dark:hover:text-brand-300"
+        >
+          <LuLinkedin size={22} />
+        </a>
       </div>
 
-      <p className="mt-8 font-Nunito text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500">
-        CV available on request
+      <p className="mt-8 flex items-center justify-center gap-1.5 font-Nunito text-sm text-stone-500 dark:text-stone-400">
+        <LuMapPin size={16} aria-hidden="true" />
+        Based in Kirkuk, Iraq
+      </p>
+      <p className="mt-2 font-Nunito text-sm text-stone-500 dark:text-stone-400">
+        CV by role:{" "}
+        {CVS.map((cv, i) => (
+          <span key={cv.href}>
+            {i > 0 && " · "}
+            <a
+              href={cv.href}
+              download
+              className="font-semibold underline decoration-stone-300 underline-offset-4 transition-colors
+                hover:text-brand-700 hover:decoration-brand-500 dark:decoration-stone-600 dark:hover:text-brand-400"
+            >
+              {cv.label}
+            </a>
+          </span>
+        ))}
       </p>
     </div>
   );

@@ -1,5 +1,6 @@
 import About from "./components/About/About";
-import Contact from "./components/Contact/contact";
+import Experience from "./components/Experience/Experience";
+import Contact from "./components/Contact/Contact";
 import Navbar from "./components/Navbar/Navbar";
 import Projects from "./components/Projects/Projects";
 import Skills from "./components/Skills/Skills";
@@ -23,6 +24,17 @@ const App = () => {
       <main id="main" className="flex flex-col gap-20 pb-20 sm:gap-24 sm:pb-24 md:gap-32">
         <section id="section_about" aria-label="About">
           <About />
+        </section>
+
+        <section id="section_experience" aria-labelledby="experience-title">
+          <Reveal>
+            <SectionHeading
+              id="experience-title"
+              title="Experience"
+              subtitle="Where I've worked and studied."
+            />
+          </Reveal>
+          <Experience />
         </section>
 
         <section id="section_skills" aria-labelledby="skills-title">

@@ -1,5 +1,5 @@
 import React from "react";
-import { LuExternalLink, LuGithub } from "react-icons/lu";
+import { LuExternalLink, LuGithub, LuLock, LuSparkles } from "react-icons/lu";
 
 interface ProjectCardType {
   openSource: boolean;
@@ -12,6 +12,8 @@ interface ProjectCardType {
   tech: string[];
   title: string;
   featured?: boolean;
+  period?: string;
+  impact?: string;
 }
 
 const ProjectCard: React.FC<ProjectCardType> = ({
@@ -24,6 +26,8 @@ const ProjectCard: React.FC<ProjectCardType> = ({
   tech,
   title,
   featured = false,
+  period,
+  impact,
 }) => {
   return (
     <article
@@ -36,9 +40,16 @@ const ProjectCard: React.FC<ProjectCardType> = ({
         }`}
     >
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-Nunito text-xl font-bold text-brand-900 md:text-2xl dark:text-brand-400">
-          {title}
-        </h3>
+        <div>
+          <h3 className="font-Nunito text-xl font-bold text-brand-900 md:text-2xl dark:text-brand-400">
+            {title}
+          </h3>
+          {period && (
+            <p className="mt-0.5 font-Nunito text-xs font-semibold text-stone-500 dark:text-stone-400">
+              {period}
+            </p>
+          )}
+        </div>
         {featured && (
           <span className="shrink-0 rounded-full bg-brand-100 px-2.5 py-1 font-Nunito text-[0.7rem] font-bold uppercase tracking-wide text-brand-800 dark:bg-brand-950 dark:text-brand-400">
             Featured
@@ -50,6 +61,13 @@ const ProjectCard: React.FC<ProjectCardType> = ({
         {description}
       </p>
 
+      {impact && (
+        <p className="mt-3 flex items-start gap-2 font-Nunito text-sm font-semibold text-brand-800 dark:text-brand-300">
+          <LuSparkles size={16} aria-hidden="true" className="mt-0.5 shrink-0" />
+          {impact}
+        </p>
+      )}
+
       <ul className="mt-5 flex list-none flex-wrap gap-1.5">
         {tech.map((t) => (
           <li key={t} className="chip">
@@ -58,41 +76,45 @@ const ProjectCard: React.FC<ProjectCardType> = ({
         ))}
       </ul>
 
-      {(hasWebsite || openSource) && (
-        <div className="mt-5 flex flex-wrap gap-2 border-t border-stone-200/70 pt-4 dark:border-stone-700/70">
-          {hasWebsite && (
-            <a
-              href={websiteLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${title} — ${websiteLabel}`}
-              className="inline-flex items-center gap-2 rounded-lg bg-brand-800 px-3 py-2 font-Roboto text-sm
-                font-medium text-brand-50 transition-[background-color,transform] duration-200
-                hover:bg-brand-700 active:scale-[0.98]
-                dark:bg-brand-600 dark:hover:bg-brand-500"
-            >
-              <LuExternalLink size={16} aria-hidden="true" />
-              {websiteLabel}
-            </a>
-          )}
-          {openSource && (
-            <a
-              href={githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${title} — source code on GitHub`}
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 px-3 py-2
-                font-Roboto text-sm font-medium text-stone-700
-                transition-[color,border-color,transform] duration-200
-                hover:border-brand-500 hover:text-brand-800 active:scale-[0.98]
-                dark:border-stone-600 dark:text-stone-300 dark:hover:border-brand-400 dark:hover:text-brand-300"
-            >
-              <LuGithub size={16} aria-hidden="true" />
-              Source
-            </a>
-          )}
-        </div>
-      )}
+      <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-stone-200/70 pt-4 dark:border-stone-700/70">
+        {hasWebsite && (
+          <a
+            href={websiteLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${title} — ${websiteLabel}`}
+            className="inline-flex items-center gap-2 rounded-lg bg-brand-800 px-3 py-2 font-Roboto text-sm
+              font-medium text-brand-50 transition-[background-color,transform] duration-200
+              hover:bg-brand-700 active:scale-[0.98]
+              dark:bg-brand-600 dark:hover:bg-brand-500"
+          >
+            <LuExternalLink size={16} aria-hidden="true" />
+            {websiteLabel}
+          </a>
+        )}
+        {openSource && (
+          <a
+            href={githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${title} — source code on GitHub`}
+            className="inline-flex items-center gap-2 rounded-lg border border-stone-300 px-3 py-2
+              font-Roboto text-sm font-medium text-stone-700
+              transition-[color,border-color,transform] duration-200
+              hover:border-brand-500 hover:text-brand-800 active:scale-[0.98]
+              dark:border-stone-600 dark:text-stone-300 dark:hover:border-brand-400 dark:hover:text-brand-300"
+          >
+            <LuGithub size={16} aria-hidden="true" />
+            Source
+          </a>
+        )}
+        {!openSource && (
+          <span className="inline-flex items-center gap-1.5 font-Nunito text-xs font-semibold text-stone-500 dark:text-stone-400">
+            <LuLock size={14} aria-hidden="true" />
+            Closed source · demo on request
+          </span>
+        )}
+      </div>
     </article>
   );
 };
