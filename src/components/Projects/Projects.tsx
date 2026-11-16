@@ -87,36 +87,44 @@ const Projects = () => {
               More projects
             </h3>
           )}
-          <ul className="mt-4 list-none border-t border-slate-200 dark:border-brand-900">
+          <ul className="mt-5 grid list-none grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((p) => (
-              <li
-                key={p.title}
-                className="grid gap-x-8 gap-y-2 border-b border-slate-200 py-5 md:grid-cols-[13rem_1fr_auto] dark:border-brand-900"
-              >
-                <div>
-                  <h4 className="text-lg font-semibold text-slate-900 dark:text-white">{p.title}</h4>
-                  {p.period && (
-                    <time className="text-sm text-slate-500 dark:text-slate-400">{p.period}</time>
-                  )}
-                </div>
-                <div>
-                  <p className="max-w-2xl font-light leading-relaxed text-slate-700 dark:text-slate-300">
+              <li key={p.title} className="flex">
+                <article className="surface flex w-full flex-col p-5 transition-colors hover:border-brand-300 dark:hover:border-brand-700">
+                  <header>
+                    <h4 className="text-lg font-semibold leading-snug tracking-tight text-slate-900 dark:text-white">
+                      {p.title}
+                    </h4>
+                    {p.period && (
+                      <time className="mt-0.5 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                        {p.period}
+                      </time>
+                    )}
+                  </header>
+
+                  <p className="mt-3 flex-1 text-sm font-light leading-relaxed text-slate-700 dark:text-slate-300">
                     {p.description}
                   </p>
-                  <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                    {p.tech.join(", ")}
-                  </p>
-                </div>
-                <div className="md:pt-0.5">
-                  {p.hasWebsite || p.openSource ? (
-                    <ProjectLinks {...p} compact />
-                  ) : (
-                    <span className="inline-flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
-                      <LuLock size={14} aria-hidden="true" />
-                      Closed source
-                    </span>
-                  )}
-                </div>
+
+                  <ul className="mt-4 flex list-none flex-wrap gap-1.5" aria-label="Tech used">
+                    {p.tech.map((t) => (
+                      <li key={t} className="chip">
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <footer className="mt-4 flex min-h-9 items-center border-t border-slate-100 pt-4 dark:border-brand-900">
+                    {p.hasWebsite || p.openSource ? (
+                      <ProjectLinks {...p} compact />
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
+                        <LuLock size={14} aria-hidden="true" />
+                        Closed source
+                      </span>
+                    )}
+                  </footer>
+                </article>
               </li>
             ))}
           </ul>
